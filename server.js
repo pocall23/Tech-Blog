@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(_dirname, "public")));
 
-app.use(require('./controllers/'));
+app.use(require('./models'));
 
 app.listen(PORT, () => {
     console.log(`Listiening on port ${PORT}!`);
