@@ -1,0 +1,20 @@
+{{#each userPosts as |userPost|}}
+{{>dashboardCard}}
+{{/each}}
+
+<h2>New Post</h2>
+<form id="newPost">
+    <div>
+        <label for="postTitle">Title:</label>
+        <input type="text" id="postTitle">
+    </div>
+    <div>
+        <label for="postText">Text:</label>
+
+
+        <textarea name="postText" id="postText" cols="25" rows="10"></textarea>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

@@ -6,7 +6,7 @@ router("/", withAuth, (req, res) => {
     Comment.create({
         ...req.body, userId: req.session.userId 
     })
-    .then(newCoimment => {
+    .then(newComment => {
         res.json(newComment);
     })
     .catch(err => {

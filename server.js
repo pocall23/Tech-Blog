@@ -1,17 +1,16 @@
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
-const exphbs = require("express-handlbars");
+const exphbs = require("express-handlebars");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sequelize =  require("./config/connection.js");
-const SequelizeStore = require('connection-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess= {
-    secret: "Super secret secret",
-    cookie: {},
+    secret: "Super secret",
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
@@ -20,22 +19,16 @@ const sess= {
 };
 
 
-appp.use(session(sess));
+app.use(session(sess));
 
-const hbs = exphbs.create({
-    helpers: {
-        format_date: date => {
-            reuturn `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-        }
-    }
-});
+const hbs = exphbs.create();
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(_dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(require('./models'));
 
